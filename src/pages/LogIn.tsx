@@ -3,8 +3,7 @@ import LogInForms from "../components/LogInForms";
 import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonRow, IonTitle, IonToolbar} from "@ionic/react";
 
 const  LogIn: React.FC = () => {
-    return (<>
-
+     return (<>
             <IonHeader>
             </IonHeader>
                 <IonContent>

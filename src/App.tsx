@@ -23,26 +23,32 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register" ;
+import Menu from "./pages/Menu";
 
 
 setupIonicReact();
 
 const App: React.FC = () => (
       <IonApp>
-        <IonReactRouter>
-            <IonRouterOutlet>
+
+
+           <IonReactRouter>
+               <IonRouterOutlet>
                 <Route exact path="/login">
-                     <LogIn/>
-                </Route>
-                 <Route exact path="/register" >
+                        <LogIn/>
+                 </Route>
+                 <Route  exact path="/register" >
                     <Register/>
+                 </Route >
 
-                </Route>
-                 <Route exact path="/">
-                    <Redirect  to="/login"/>
-                </Route>
+                  <Route exact path="/menu" >
+                      <Menu/>
+                   </Route>
+                 <Route  exact path="/">
+                    <Redirect to="/login"/>
+                </Route >
 
-             </IonRouterOutlet>
+               </IonRouterOutlet>
         </IonReactRouter>
     </IonApp>
 );
