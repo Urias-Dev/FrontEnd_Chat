@@ -10,7 +10,7 @@ const RegisterForms: React.FC =  () => {
             <p className='font-medium  text-lg text-gray-500 mt-4   text-center '> Create a new account </p>
 
                <div className='mt-8' >
-                <div className=' flex flex-col ' >
+                 <div className=' flex flex-col ' >
 
                      <IonItem >
                          <IonLabel position={"floating"   }  className={"max-sm:text-center  "}> Name </IonLabel>

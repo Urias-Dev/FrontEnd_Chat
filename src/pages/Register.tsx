@@ -24,8 +24,8 @@ import {
 
               <IonHeader  class   ="ion-no-border" >
                  <IonToolbar >
-                        <IonButtons slot="start" >
-                        <IonBackButton defaultHref="login"/>
+                        <IonButtons  slot="start" >
+                        <IonBackButton  defaultHref="login"/>
                       </IonButtons >
                 </IonToolbar>
              </IonHeader>

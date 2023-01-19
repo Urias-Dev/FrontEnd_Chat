@@ -36,17 +36,24 @@ const App: React.FC = () => (
                <IonRouterOutlet>
                 <Route exact path="/login">
                         <LogIn/>
-                 </Route>
+                  </Route>
                  <Route  exact path="/register" >
                     <Register/>
                  </Route >
 
-                  <Route exact path="/menu" >
+                  <Route exact path="/contacts"   >
                       <Menu/>
+                    </Route>
+                    <Route exact path="/conversation"  >
+                       <Menu/>
                    </Route>
+                   <Route exact path="/profile"   >
+                       <Menu/>
+                   </Route>
+
                  <Route  exact path="/">
                     <Redirect to="/login"/>
-                </Route >
+                 </Route >
 
                </IonRouterOutlet>
         </IonReactRouter>

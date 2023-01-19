@@ -19,44 +19,56 @@ import {
     personCircle,
     settingsOutline
 } from "ionicons/icons";
-import MenuView from "../components/MenuView";
+
 import {Redirect, Route} from "react-router-dom";
 import LogIn from "./LogIn";
 import Register from "./Register";
 import {IonReactRouter} from "@ionic/react-router";
+import Conversation from "../components/Conversation";
+import Profile from "../components/Profile";
+import Contacts from "../components/Contacts";
 
 const Menu: React.FC = () => {
     return (<>
             <IonReactRouter>
                 <IonTabs>
                     <IonRouterOutlet>
-                        <Route exact path= "/menu">
-                            <MenuView/>
-                        </Route>
-                    </IonRouterOutlet>
-
-                    <IonTabBar slot="bottom">
+                        <Route exact path= "/contacts">
+                               <Contacts />
+                        </Route >
 
 
-                         <IonTabButton  tab="menu" href="/menu" >
-                             <IonIcon icon= {callOutline } aria-hidden="true"/>
-                            <IonLabel>  Contacts </IonLabel>
-                             <IonBadge>6</IonBadge>
-                        </IonTabButton>
-                        <IonTabButton tab="login">
+                              <Route exact path={"/conversation"   }>
+                                  <Conversation/>
 
-                             <IonIcon  icon={chatbubbleOutline} aria-hidden="true"/>
+                           </Route >
+
+                        <Route exact path={"/profile"    }>
+                            <Profile />
+
+                        </Route >
+                     </IonRouterOutlet>
+
+                      <IonTabBar slot="bottom">
+
+                          <IonTabButton   tab="contacts"  href="/contacts"    >
+                              <IonIcon icon= {callOutline } aria-hidden="true"/>
+                            <IonLabel>  Contacts </IonLabel >
+                             <IonBadge>7 </IonBadge>
+                          </IonTabButton>
+
+                             <IonTabButton tab="conversation"    href= {"/conversation"}>
+
+                             <IonIcon   icon={chatbubbleOutline}  aria-hidden="true"/>
                             <IonLabel> Chat
                             </IonLabel>
-                            <IonBadge>10 </IonBadge>
+                            <IonBadge        > 10  </IonBadge>
                          </IonTabButton>
-                        <IonTabButton tab="login">
+                        <IonTabButton  tab="profile"   href={"/profile"} >
                             <IonIcon icon={settingsOutline } aria-hidden="true"/>
                             <IonLabel> Settings
                               </IonLabel>
-
-
-                         </IonTabButton>
+                            </IonTabButton>
                     </IonTabBar>
                 </IonTabs>
             </IonReactRouter>
