@@ -18,10 +18,10 @@ import {RegisterData} from "../interfaces";
         pass: '',
         correo: '',
          foto:  ''
-    });
+    }) ;
 
      const handleSubmit =   (event : any )  => {
-        event.preventDefault();
+         event.preventDefault();
 
 
            createUser(  formData )
@@ -38,7 +38,7 @@ import {RegisterData} from "../interfaces";
 
 
 
-     const   datos = (nombre: string , Apellido_p: string, Apellido_m:  string, Pass: string , Correo:   string, Foto  : string  ) => {
+     const     datos = (nombre: string , Apellido_p: string, Apellido_m:  string, Pass: string , Correo:   string, Foto  : string  ) => {
           console.log(nombre, Apellido_p, Apellido_m, Pass, Correo, Foto    )
      }
 
@@ -59,20 +59,20 @@ import {RegisterData} from "../interfaces";
 
 
                          <IonLabel position={"floating"   }  className={"max-sm:text-center  "}> Name </IonLabel>
-                            <IonInput type="text"   clearInput={ true  }    maxlength={25 } value=   {formData.nombre}      onIonChange ={(event) => setFormData({...formData,  nombre: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
+                            <IonInput type="text"   clearInput={ true  }    maxlength={25 } value=   {formData.nombre }      onIonChange ={(event) => setFormData({...formData,  nombre: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
                       </IonItem>
                   </div>
 
 
 
-                 <div className='flex flex-col mt-4'  >
+                 <div className='flex flex-col mt-4'    >
 
-                     <IonItem >
+                         <IonItem >
 
-                        <IonLabel  position={"floating"  }   class={ "max-sm:text-center"}>  Last Name P  </IonLabel>
+                         <IonLabel  position={"floating"  }   class={ "max-sm:text-center"}>    Last Name P  </IonLabel>
 
 
-                            <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_p  }      onIonChange ={(event) => setFormData({...formData, apellido_p : event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
+                            <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_p  }      onIonChange ={(event) => setFormData({...formData, apellido_p : event.detail.value  != undefined ? event.detail.value : ""})} > </IonInput>
 
 
                     </IonItem>
@@ -134,7 +134,7 @@ import {RegisterData} from "../interfaces";
 
 
 
-                   <div className=  'mt-8 flex flex-col gap-y-4' >
+                   <div className=  'mt-8 flex flex-col gap-y-4'  >
                      <button type={"submit"  }
                          className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4   bg-gradient-to-r from-cyan-500 to-blue-500  rounded-xl text-white font-bold text-lg'>Sign
                           Up

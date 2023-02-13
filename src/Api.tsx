@@ -43,24 +43,29 @@ export const createUser = (formData: any) => {
  }
 
 
-         export    const  findMessages =  ( ) => {
+         export    const  findMessages =  ( ) =>  {
 
           return  API.get (  '/find_message'   ) .then    ( response => {
-               console.log(response.data.data  )
-          })
+                console.log(response.data.data  )
+           })
 
 
  }
 
 
 
-          export    const login    =  ( data:  any  )=>     {
-                   return API.post (  '/login'  , data    )
+          export    const login    =  (  data:  any  )=>     {
+                   return API. post (  '/login'  , data    )
           }
 
 
 
-       export  const finUserById   = ( id:  string   )   =>          {
-          return   API.get  (       '/findone_user/'   +   id    )
+       export  const  finUserById    = ( id:  string   )   =>          {
+          return   API.get  (        '/findone_user/'   +   id    )
 
-  }
+   }
+
+
+    export    const   updateUser  = ( user_id: string , data  : any) => {
+             return   API.put  ('/update_user/'+ user_id , data    )
+   }

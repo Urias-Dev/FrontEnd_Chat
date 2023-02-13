@@ -14,21 +14,21 @@ import {
  import  avatar  from     '../assets/img/avatar.png'
  import {createOutline, logOutOutline, sendOutline} from "ionicons/icons"   ;
 import {useHistory} from "react-router-dom";
-import {finUserById} from "../Api";
-import {getId} from "../interfaces";
+import {createUser, finUserById, updateUser} from "../Api";
+import {getId, RegisterData} from "../interfaces";
 
 
-       const  Profile  : React.FC  <getId >  = ({user_id  }) =>       {
+       const  Profile  : React.FC  <getId >  = ({user_id  }) =>        {
 
 
 
-          let  [  data  ,setData ] = useState({
 
-              nombre: '',
-              apellido_p: '',
-              correo: ''
-
-          }   )
+           const [data,   setData   ] = useState<RegisterData  > (  {
+               user_id:  '',
+               nombre: '',
+               apellido_p: '',
+               correo: '',
+             });
 
 
 
@@ -44,17 +44,34 @@ import {getId} from "../interfaces";
 
 
                     finUserById ( user_id  )  .then    (response      =>   {
-                        setData    (  {nombre : response. data.data.nombre  , apellido_p:   response.data.data.apellido_p   ,  correo:  response.data.data.correo     }   )
+                        setData    (  {user_id: response.data.data.user_id, nombre : response. data.data.nombre  , apellido_p:   response.data.data.apellido_p   ,  correo:  response.data.data.correo     }   )
 
                   }   )
               }
 
 
-                 useEffect(() =>    {
+                 useEffect(() =>      {
                       getData  ();
-                     }   , []  )
+                     }   ,   []  )
 
-            return  (< >
+
+           const   update  =   (event : any )  => {
+               event.preventDefault();
+
+
+                updateUser   ( user_id,  data     )
+
+                   .then(response =>   {
+                       console.log(response.data);
+                   })
+                   .catch(error => {
+                       console.log(error);
+                   } );
+           }
+
+
+
+           return  (< >
 
                  <IonPage>
 
@@ -79,29 +96,36 @@ import {getId} from "../interfaces";
 
                                <IonItem  lines={  "none" }      >
                                     <IonLabel position={"fixed"     }     className={"max-sm:text-center  "  }  >    Name:     </IonLabel >
-                                     <IonInput  type="text"    maxlength={25 } value={ data.nombre    } > </IonInput>
+                                     <IonInput  type="text"    maxlength={25 } value={ data.nombre    }    onIonChange ={(event) => setData ({...data,  nombre: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
                                       <IonIcon icon={createOutline  }></IonIcon>
                                </IonItem>
 
                             <IonItem   lines={"none"}  >
                               <IonLabel position={"fixed"      }  className={"max-sm:text-center   "}> Last Name : </IonLabel>
-                              <IonInput   type="text"    maxlength={ 25  }    value ={  data.apellido_p } > </IonInput>
+                              <IonInput   type="text"    maxlength={ 25  }    value ={  data.apellido_p }   onIonChange  ={(event) => setData ({... data,  apellido_p: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
                                 <IonIcon icon={createOutline  }></IonIcon>
 
                             </IonItem>
 
-                            <IonItem  lines={ "none"} >
+                            <IonItem  lines={ "none"}  >
 
                               <IonLabel position={"fixed"   }  className={"max-sm:text-center   " }>Email: </IonLabel>
-                              <IonInput   type="email"      maxlength={25 }  value ={data.correo   }> </IonInput>
+                              <IonInput   type="email"      maxlength={25 }  value ={data.correo   }     onIonChange ={(event) => setData({ ...data,  correo : event.detail.value != undefined ? event.detail.value : ""})}>  </IonInput>
                               <IonIcon icon={createOutline   }> </IonIcon>
                           </IonItem >
 
-                           </form  >
+                             </form   >
+                           <div className={"flex   justify-center "} >
 
-                   </div>
+                             <button type={"submit"  } onClick={update }
+                                    className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4   bg-gradient-to-r from-cyan-500 to-blue-500  rounded-xl text-white font-bold text-lg'> Update
+                           </button>
 
-             </IonContent  >
+                           </div>
+
+                       </div>
+
+             </IonContent   >
 
                 <IonFooter class = {"ion-no-border" }>
                     <div className= { "flex ion-justify-content-end  mb-10 mr-3  "}  >
