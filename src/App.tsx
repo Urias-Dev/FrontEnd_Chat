@@ -24,12 +24,13 @@ import './theme/variables.css';
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register" ;
 import Menu from "./pages/Menu";
+import Conversation from "./components/Conversation";
 
 
 setupIonicReact();
 
 const App: React.FC = () => (
-      <IonApp>
+       <IonApp>
 
 
            <IonReactRouter>
@@ -37,21 +38,19 @@ const App: React.FC = () => (
                 <Route exact path="/login">
                         <LogIn/>
                   </Route>
-                 <Route  exact path="/register" >
-                    <Register/>
-                 </Route >
+                   <Route  exact path="/register" >
 
-                  <Route exact path="/contacts"   >
-                      <Menu/>
+                     <Register/>
+                  </Route >
+
+                   <Route exact  path="/chat-online/:id"         component={Menu }     >
                     </Route>
-                    <Route exact path="/conversation"  >
-                       <Menu/>
-                   </Route>
-                   <Route exact path="/profile"   >
-                       <Menu/>
-                   </Route>
 
-                 <Route  exact path="/">
+                       <Route exact  path  =    "/chat/:id"  component={Conversation} >
+
+                      </Route>
+
+                 <Route  exact path="/"  >
                     <Redirect to="/login"/>
                  </Route >
 

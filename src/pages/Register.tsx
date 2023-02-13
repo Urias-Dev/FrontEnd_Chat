@@ -6,7 +6,7 @@ import {
     IonButtons,
     IonBackButton,
     IonRefresher,
-    IonRefresherContent,   RefresherEventDetail
+    IonRefresherContent, RefresherEventDetail, IonPage
 } from "@ionic/react";
 
  import RegisterForms from "../components/RegisterForms";
@@ -20,7 +20,9 @@ import {
              event.detail.complete ();
          }, 2000);
      }
-     return (<>
+      return (<>
+
+              <IonPage>
 
               <IonHeader  class   ="ion-no-border" >
                  <IonToolbar >
@@ -42,6 +44,9 @@ import {
 
                 </div>
             </IonContent>
+
+              </IonPage>
+
         </>
     );
 };

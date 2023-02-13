@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     IonBadge,
     IonContent,
@@ -8,73 +8,64 @@ import {
     IonTabBar,
     IonTabs,
     IonTabButton,
-    IonRouterOutlet
+    IonRouterOutlet,   IonSegment, IonSegmentButton, IonToolbar, IonTitle, IonPage
 } from "@ionic/react";
-import {
-    calendar,
-    call, callOutline,
-    chatbubble,
-    chatbubbleOutline,
-    informationCircle,
-    personCircle,
-    settingsOutline
-} from "ionicons/icons";
 
-import {Redirect, Route} from "react-router-dom";
-import LogIn from "./LogIn";
-import Register from "./Register";
-import {IonReactRouter} from "@ionic/react-router";
-import Conversation from "../components/Conversation";
-import Profile from "../components/Profile";
+
+ import Profile from "../components/Profile";
 import Contacts from "../components/Contacts";
+import { RouteComponentProps } from 'react-router-dom';
 
-const Menu: React.FC = () => {
-    return (<>
-            <IonReactRouter>
-                <IonTabs>
-                    <IonRouterOutlet>
-                        <Route exact path= "/contacts">
-                               <Contacts />
-                        </Route >
+interface Props extends RouteComponentProps<{ id: string }> {}
+
+ const Menu: React.FC<Props> =  ({match})  =>  {
+
+     const [selectedOption,  setSelectedOption] =  useState (  'contacts'   );
+
+     const { id } = match.params;
+
+     console.log("el idd es", id)
 
 
-                              <Route exact path={"/conversation"   }>
-                                  <Conversation/>
 
-                           </Route >
 
-                        <Route exact path={"/profile"    }>
-                            <Profile />
 
-                        </Route >
-                     </IonRouterOutlet>
 
-                      <IonTabBar slot="bottom">
+     return    ( <  >
 
-                          <IonTabButton   tab="contacts"  href="/contacts"    >
-                              <IonIcon icon= {callOutline } aria-hidden="true"/>
-                            <IonLabel>  Contacts </IonLabel >
-                             <IonBadge>7 </IonBadge>
-                          </IonTabButton>
+             <IonPage>
+                  <IonHeader >
 
-                             <IonTabButton tab="conversation"    href= {"/conversation"}>
+                     <IonToolbar color={ "primary" }>
+                        <IonTitle slot={ "start"} >DevChat </IonTitle>
+                    </IonToolbar>
 
-                             <IonIcon   icon={chatbubbleOutline}  aria-hidden="true"/>
-                            <IonLabel> Chat
-                            </IonLabel>
-                            <IonBadge        > 10  </IonBadge>
-                         </IonTabButton>
-                        <IonTabButton  tab="profile"   href={"/profile"} >
-                            <IonIcon icon={settingsOutline } aria-hidden="true"/>
-                            <IonLabel> Settings
-                              </IonLabel>
-                            </IonTabButton>
-                    </IonTabBar>
-                </IonTabs>
-            </IonReactRouter>
+               <IonSegment   value={selectedOption   }    onIonChange={e  => e.detail.value &&  setSelectedOption(e.detail.value)}>
+                 <IonSegmentButton  value="contacts"  >
+                    <IonLabel >   Contacts </IonLabel>
+                 </IonSegmentButton>
 
-        </>
-    );
+
+                   <IonSegmentButton  value="profile"     >
+                     <IonLabel>  Profile </IonLabel>
+                   </IonSegmentButton>
+
+               </IonSegment>
+
+             </IonHeader>
+
+             <IonContent >
+
+                   {selectedOption  === 'contacts' &&  <Contacts user_id ={id  }  />    }
+                     {selectedOption === 'profile' &&  <Profile   user_id={id}  />  }
+
+             </IonContent>
+
+             </IonPage>
+
+         </>
+
+     ) ;
 };
 
 export default Menu;
