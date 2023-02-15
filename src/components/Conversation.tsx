@@ -18,92 +18,141 @@ import {
 }  from "@ionic/react";
   import {sendOutline} from "ionicons/icons" ;
 import {Message} from "../interfaces" ;
-import {RouteComponentProps, useHistory} from 'react-router-dom';
+import {RouteComponentProps, useHistory, useLocation} from 'react-router-dom';
+import {findMessages,  sendMessagess} from "../Api";
 
-interface Props extends RouteComponentProps<{ id: string }> {}
+type StateType  = {
+    name: string;
+}
 
-
- const Conversation :  React.FC <Props > = ({match  })  =>
-
-     {
-
-       const { id } = match.params ;
+  interface Props extends RouteComponentProps<{ id: string   }> {}
 
 
+ const Conversation :  React.FC <Props >  =   ({match   })  =>
 
+       {
 
-
-
-
-
-       const   socket =  io (   'http://localhost:3000'        )
-
-
-      const [messages, setMessages] = useState<Message  []>([] );
-      const  [message, setMessage ]    = useState(  "" )
+       const { id } = match .params  ;
 
 
 
 
-        useEffect ((  ) => {
 
-           const receiveMessage  = (message : Message  )  =>  {
-              setMessages( [...messages, message     ]  )
+           const location = useLocation<StateType >  () ;
+           const name = location.state?.name;
 
-         };
 
-         socket.on  ('message'  , receiveMessage  )
 
-         return () => {
-             socket.off ('message'     ,   receiveMessage       )
+
+
+
+           const   socket =  io ('http://localhost:3000'  )
+
+
+      const [messages, setMessages ] = useState <Message    []>([] );
+        const  [message, setMessage  ]      =  useState(  ""   )
+
+
+
+
+
+
+
+             useEffect ( (   )  =>   {
+
+
+
+
+
+
+
+                 const  receiveMessage    =        (   message     :  Message   )            =>  {
+                        setMessages (    [   ...messages, message        ]
+
+
+                          )
+
+
+          };
+
+
+
+
+
+
+         socket. on   ( 'message'      ,     receiveMessage             )
+
+          return () =>  {
+             socket.off ('message'   , receiveMessage    )
          }
-      },  [messages ]   )
+
+      } ,  [messages]     )
 
 
-             const  handleSubmit =   (event: any     )=>  {
+             const   handleSubmit =   (event: any     )=>  {
             event.preventDefault ( );
 
-              const currentDate = new Date() ;
+              const currentDate = new   Date( ) ;
 
-              const currentTime = currentDate.toLocaleTimeString('en-US',   { hour: 'numeric', minute: 'numeric', hour12: true  });
-
-
-
-                const newMessage: Message =  {
-                     body: message ,
-                    from:   "me" ,
-                    fecha :  currentTime
-               }
-
-               setMessages([   ...messages, newMessage     ])
-                setMessage ("")
-                 socket.emit( "message" , newMessage.body     )
-
-             }
+                const   currentTime =   currentDate.toLocaleTimeString   ( 'en-US',   { hour: 'numeric', minute: 'numeric', hour12: true  });
 
 
 
 
+                  const  newMessage :         Message =    {
 
 
-      return    (  <>
+                          from   : 1  ,
+
+                         contenido:  message    ,
+                           fecha  :   currentTime
+
+
+                  }
+
+
+
+                   sendMessagess (newMessage  ) .then   (  response =>  {
+                       console.log(response .data. data    )
+                    } )
+
+
+
+
+
+                 setMessages   (  [...messages ,        newMessage         ] )
+
+
+
+                      setMessage ("" )
+                   socket.emit( "message"  ,     newMessage.contenido             )
+
+              }
+
+
+
+
+
+
+      return    (  < >
 
              <IonPage >
 
                  <IonHeader >
-                     <IonToolbar   color={"primary"  } >
+                     <IonToolbar   color={ "primary"  } >
                         <IonButtons    slot="start" >
 
 
-                                 <IonBackButton     defaultHref={"/chat-online/"+id}   />
-                          </IonButtons >
+                                 <IonBackButton      defaultHref={"/chat-online/"+id}       />
+
+                            </IonButtons >
                              <IonAvatar slot={"start"  } >
-                               <img   className= {    "p-2 "} src=   {avatar } alt="" />
+                               <img    className= {    "p-2 "} src=   {avatar } alt="" />
                              </IonAvatar >
 
-                                  <div>
-                            <IonTitle  >  Urias    </IonTitle>
-                               <h2 className="ml-5"   > Online </h2>
+                                   <div>
+                                  <IonTitle  >     {name}       </IonTitle>
+                               <h2 className= " ml-5"    > Online </h2>
                          </div>
                          </IonToolbar>
 
@@ -113,19 +162,19 @@ interface Props extends RouteComponentProps<{ id: string }> {}
 
 
 
-                             <IonGrid   >
+                              <IonGrid    >
 
 
-
-                                       { messages.map ((message    ,  index)   =>    (
+                                           {   messages.map  ((message      ,  index)   =>    (
 
 
                                          <IonRow   key={index }   >
 
-                                         <IonCol  size= {"8"   }       offset={message. from ===  "me" ? "0"  : "4" }   className=  { `p-2   border rounded-2xl   ${message.from === "me" ?   " bg-gradient-to-r   from-cyan-500 to-blue-500  mt-4  whitespace-pre-wrap   text-white " : " bg-gradient-to-r  from-emerald-500 to-emerald-500  mt-4  whitespace-pre-wrap   text-white "} `} >
-                                          <b> {message.from   }   </b >
+                                         <IonCol  size= {"8"   }        offset={message. from ===  1 ?  "4"  : "0"   }   className=  { `p-2   border rounded-2xl    ${message.  from === 1  ?   " bg-gradient-to-r   from-cyan-500 to-blue-500  mt-4  whitespace-pre-wrap   text-white " : " bg-gradient-to-r  from-emerald-500 to-emerald-500  mt-4  whitespace-pre-wrap   text-white "} `} >
+
+                                          <b> {message. from     }    </b  >
                                               <div  className= {"flex  justify-start  " }   >
-                                               <span >{message.body }</span>
+                                               <span >{message.contenido   }</span>
                                            </div>
                                            <div  className=   {"flex justify-end " }> <br/>
                                                <span>{message.fecha} </span>

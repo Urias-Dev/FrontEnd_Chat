@@ -20,13 +20,24 @@
  import {Simulate} from "react-dom/test-utils";
  import error = Simulate.error;
  import {findUser} from "../Api";
- import {getId} from "../interfaces";
-
-   const  Contacts : React.FC <getId> = ( {user_id})  =>   {
-
+ import {getId} from "../interfaces" ;
+ import {useHistory} from "react-router-dom";
 
 
-       let [results  , setResults      ]   =      useState  (       []      )
+ type StateType =  {
+     name: string;
+ }
+
+
+ const  Contacts : React.FC <getId> = ( {user_id })  =>   {
+
+
+
+        let [results  , setResults      ]   =      useState  (       []         )
+
+       let navigate  = useHistory  ();
+
+
 
 
 
@@ -36,16 +47,15 @@
 
        const datos = () =>    {
               findUser() .then     (response =>  {
-                   setResults  (response.data.data  )
-
+                   setResults  (response.data .data    )
              }  )
            }
 
 
 
          useEffect(()    => {
-         datos  ( )  ;
-            } ,   [results] );
+            datos  ( )   ;
+            } ,    [results ] );
 
 
 
@@ -59,11 +69,22 @@
 
                    const target  =     ev.    target  as   HTMLIonSearchbarElement    ;
 
-                 if (target  )  query =  target.value!.  toLowerCase     (  );
+                 if (target  )  query =   target.value! .   toLowerCase     (  );
 
-               setResults  (results.    filter       ( (objects :    any   )  =>          objects.nombre.toLowerCase()  .indexOf(query) >   -1))  ;
+               setResults  (results.    filter       ( (objects :    any   )  =>            objects.nombre.toLowerCase()  .indexOf(query) >   -1))  ;
 
-            }
+              }
+
+
+              const  handleSubmit   =  ( name  : string  ) =>   {
+
+                   const state: StateType = { name:   name    };
+
+                  navigate .push(   {
+                      pathname:   '/chat/'  +  user_id   ,
+                      state:  state
+                  }) ;
+             }
 
 
 
@@ -91,15 +112,15 @@
 
                       <IonList     lines={   "none" }    >
 
-                        {  results.map    ( (objects: any        )      =>
+                        {  results.map    ( (objects: any         )      =>
 
 
-                           <IonItem    href= {  "/chat/"+ user_id     }   key= {objects.user_id     }     >
-                             <IonAvatar slot={"start"   }>
+                               <IonItem       onClick={ () => handleSubmit  (objects  .nombre  ) }   key =  {objects.user_id     }     >
+                                  <IonAvatar slot={"start"   }>
                                  <img   src=  {avatar} alt=""   />
                              </IonAvatar >
                              <IonLabel  >
-                                 <h2   >{objects .nombre  }</h2>
+                                 <h2   >{objects .nombre  }    </h2    >
                                  <h3> { objects.apellido_p  } </h3>
 
                                </IonLabel >

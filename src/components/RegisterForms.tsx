@@ -24,9 +24,9 @@ import {RegisterData} from "../interfaces";
          event.preventDefault();
 
 
-           createUser(  formData )
+            createUser(   formData )
 
-             .then(response =>   {
+             .then(response =>      {
                 console.log(response.data);
              })
             .catch(error => {

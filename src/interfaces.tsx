@@ -5,15 +5,15 @@
 
 
   export    interface  Message {
-     body: string;
-     from: string;
-     fecha: string;
+       from ?   :  number ;
+      contenido : string;
+        fecha: string;
  }
 
 
-     export   interface  RegisterData   {
-      user_id?:  string     ,
-      nombre?:  string ,
+     export   interface   RegisterData    {
+      user_id  ? :  string     ,
+      nombre?:   string ,
       apellido_p?: string  ,
       apellido_m?: string,
       pass?:  string   ,

@@ -38,7 +38,7 @@ const App: React.FC = () => (
                 <Route exact path="/login">
                         <LogIn/>
                   </Route>
-                   <Route  exact path="/register" >
+                   <Route  exact path="/register"  >
 
                      <Register/>
                   </Route >
@@ -46,7 +46,7 @@ const App: React.FC = () => (
                    <Route exact  path="/chat-online/:id"         component={Menu }     >
                     </Route>
 
-                       <Route exact  path  =    "/chat/:id"  component={Conversation} >
+                       <Route exact  path  =    "/chat/:id"   component={Conversation} >
 
                       </Route>
 

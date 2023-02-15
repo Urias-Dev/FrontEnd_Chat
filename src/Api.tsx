@@ -1,4 +1,5 @@
 import axios from "axios";
+import {LoginData, Message, RegisterData} from "./interfaces";
 
 
 const API = axios.create({baseURL: 'http://localhost:3000'})
@@ -43,29 +44,33 @@ export const createUser = (formData: any) => {
  }
 
 
-         export    const  findMessages =  ( ) =>  {
+         export    const    findMessages =         ( ) =>  {
 
-          return  API.get (  '/find_message'   ) .then    ( response => {
-                console.log(response.data.data  )
-           })
+
+
+           return  API.get (  '/find_message'       )
 
 
  }
 
 
 
-          export    const login    =  (  data:  any  )=>     {
-                   return API. post (  '/login'  , data    )
+          export    const login    =  (  data:  LoginData    )=>     {
+                   return API. post (   '/login'  , data    )
           }
 
 
 
-       export  const  finUserById    = ( id:  string   )   =>          {
-          return   API.get  (        '/findone_user/'   +   id    )
+       export  const  finUserById    =  ( id:   string   )   =>          {
+          return   API.get   (         '/findone_user/'      +  id    )
 
    }
 
 
-    export    const   updateUser  = ( user_id: string , data  : any) => {
-             return   API.put  ('/update_user/'+ user_id , data    )
-   }
+    export    const   updateUser  = ( user_id: string , data: RegisterData   ) => {
+             return   API.put  ('/update_user/'+   user_id , data      )
+       }
+
+         export   const  sendMessagess  =  (messages :   Message       )      =>     {
+           return  API.post  (   '/create_messages'     ,  messages     )
+         }
