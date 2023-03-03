@@ -15,32 +15,11 @@ export const createUser = (formData: any) => {
 
    export    const findUser  = ()   => {
 
-       return  API.get( '/find_user '  )
-
-
-
-            {/*.then( response =>   {
-
-
-              console. log  ( response.data.data)
-
-            for (let i = 0; i < response.data.data.length; i++) {
-               let objeto = response.data.data[i] ;
-                console.log(objeto.nombre);
+       return  API.get( '/find_user'    )
 
 
 
 
-             }
-
-
-
-             return response.data.data
-
-
-         })
-
-      */}
  }
 
 
@@ -48,7 +27,7 @@ export const createUser = (formData: any) => {
 
 
 
-           return  API.get (  '/find_message'       )
+           return  API.get (  '/find_message'         )
 
 
  }

@@ -34,12 +34,12 @@ import {
 
               <IonContent >
                   <IonRefresher slot="fixed"  onIonRefresh={handleRefresh} >
-                      <IonRefresherContent  refreshingSpinner="bubbles"   >
+                      <IonRefresherContent  refreshingSpinner=  "bubbles"   >
                       </IonRefresherContent>
                   </IonRefresher>
                 <div className={"flex   w-full h-screen"}>
-                    <div className={"w-full flex items-center justify-center max-sm:h-3/4"}>
-                        <RegisterForms/>
+                    <div className={"w-full flex items-center justify-center max-sm:h-4/5 " }>
+                         <RegisterForms />
                     </div>
 
                 </div>

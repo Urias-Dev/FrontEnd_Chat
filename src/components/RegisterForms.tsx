@@ -1,16 +1,33 @@
 import React, {useState} from 'react';
-import {IonInput, IonItem, IonLabel} from "@ionic/react";
+import {
+    IonButton,
+    IonButtons,
+    IonCheckbox, IonContent,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonModal, IonTitle,
+    IonToolbar
+} from "@ionic/react";
 import {createUser} from "../Api";
 import {useHistory} from "react-router-dom";
 import {RegisterData} from "../interfaces";
+import Terminosycondiciones from "./terminosycondiciones";
 
  const RegisterForms: React.FC =  () => {
+
+     const [showModal , setShowModal] =  useState     (false);
+     const [terminos, setTerminos] = useState (false);
+
+
+
 
 
 
      const history = useHistory ();
 
-      const [formData,   setFormData] = useState<RegisterData  > ( {
+      const [formData,   setFormData] = useState<RegisterData  >  (   {
           user_id: '',
         nombre: '',
         apellido_p: '',
@@ -24,7 +41,7 @@ import {RegisterData} from "../interfaces";
          event.preventDefault();
 
 
-            createUser(   formData )
+             createUser  (   formData )
 
              .then(response =>      {
                 console.log(response.data);
@@ -42,11 +59,10 @@ import {RegisterData} from "../interfaces";
           console.log(nombre, Apellido_p, Apellido_m, Pass, Correo, Foto    )
      }
 
-      return (
+      return  (
 
-        <div className='  w-11/12   max-w-[950px]  px-10  py-20 rounded-3xl bg-white  border-2 border-gray-100    max-sm:border-0'>
+        <div className='  w-11/12    max-w-[950px]  px-10  py-20 rounded-3xl bg-white  border-2 border-gray-100    max-sm:border-0  ' >
             <h1 className='text-5xl font-semibold  max-sm:text-4xl max-sm:font-normal  text-center' >  Register  </h1>
-            <p className='font-medium  text-lg text-gray-500 mt-4   text-center '> Create a new account </p >
 
                 <div className='mt-8'  >
 
@@ -126,23 +142,63 @@ import {RegisterData} from "../interfaces";
                                  <IonLabel  position={"floating"  }   class={ "max-sm:text-center"}> Foto </IonLabel>
 
 
-                                 <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.foto}      onIonChange ={(event) => setFormData({...formData, foto : event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
-                             </IonItem>
+                                 <IonInput type="text"   clearInput={  true  }   maxlength={25 } value= {formData.foto}      onIonChange ={(event) => setFormData({...formData, foto : event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
+
+                              </IonItem>
                          </div>
 
 
+                           <div className={ "flex   flex-col  mt-4 " }   >
+                                  <IonItem>
 
 
 
-                   <div className=  'mt-8 flex flex-col gap-y-4'  >
-                     <button type={"submit"  }
-                         className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4   bg-gradient-to-r from-cyan-500 to-blue-500  rounded-xl text-white font-bold text-lg'>Sign
-                          Up
-                    </button>
+                                         <IonCheckbox onIonChange=   {e  =>  setTerminos(e.detail.checked)}     onClick= {  () =>     setShowModal        (     true)} >  </IonCheckbox>
+                                       <IonLabel    className={"ml-3  "   }>Ver términos  y  condiciones </IonLabel>
 
 
-                </div>
+                                 </IonItem  >
+                              </div     >
+
+
+
+
+
+
+                     <div className=  'mt-8  flex flex-col gap-y-4'  >
+                     <button type={"submit"   }   disabled={!terminos}
+                          className='active:scale-[.98] active:duration-75    transition-all hover:scale-[1.01]  ease-in-out transform py-4   bg-gradient-to-r from-cyan-500 to-blue-500  rounded-xl text-white font-bold text-lg'>Sign
+                           Up
+                     </button >
+
+                         <IonModal    isOpen=       {showModal}    >
+                             <IonHeader >
+
+                                 <IonToolbar >
+
+                                       <IonTitle slot={"start" }>  Terminos y condiciones   </IonTitle>
+                                      <IonButtons  slot= {"end"}>
+                                           <IonButton   onClick={  () =>    setShowModal  ( false)}>Cerrar</IonButton>
+                                     </IonButtons>
+
+                                 </IonToolbar>
+                              </IonHeader>
+                             <IonContent className={" ion-padding  "}>
+                                 <Terminosycondiciones  />
+
+
+                             </IonContent>
+
+
+
+
+                         </IonModal>
+
+
+                     </div>
+
                      </form>
+
             </div>
         </div>
     ) ;

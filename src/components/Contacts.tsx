@@ -53,9 +53,9 @@
 
 
 
-         useEffect(()    => {
-            datos  ( )   ;
-            } ,    [results ] );
+         useEffect(()     => {
+             datos  ( )      ;
+            } ,    [ ]  )     ;
 
 
 
@@ -65,7 +65,7 @@
 
 
 
-                 let query =   "";
+                  let query =   "" ;
 
                    const target  =     ev.    target  as   HTMLIonSearchbarElement    ;
 
@@ -76,13 +76,13 @@
               }
 
 
-              const  handleSubmit   =  ( name  : string  ) =>   {
+               const  handleSubmit     =  ( name  : string  ) =>    {
 
-                   const state: StateType = { name:   name    };
+                   const state:  StateType = {  name:    name     } ;
 
                   navigate .push(   {
-                      pathname:   '/chat/'  +  user_id   ,
-                      state:  state
+                        pathname:    '/chat/'  +    user_id     ,
+                      state :  state
                   }) ;
              }
 
