@@ -5,25 +5,26 @@
 
 
   export    interface  Message {
-       from ?   :  number ;
+       from  ?   :  string  ;
       contenido : string;
         fecha: string;
  }
 
 
      export   interface   RegisterData    {
-      user_id  ? :  string     ,
+      user_id  ? :  string       ,
       nombre?:   string ,
       apellido_p?: string  ,
       apellido_m?: string,
       pass?:  string   ,
-      correo?:    string  ,
+      correo?:    string   ,
       foto? :   string
    }
 
 
 
+    export interface  getId      {
+     id   : string
+   }
 
- export interface  getId  {
-     user_id  : string
- }
+

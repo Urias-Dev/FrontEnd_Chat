@@ -37,20 +37,22 @@ import Terminosycondiciones from "./terminosycondiciones";
          foto:  ''
     }) ;
 
-     const handleSubmit =   (event : any )  => {
+     const   handleSubmit = async  (event : any )  => {
          event.preventDefault();
 
 
-             createUser  (   formData )
 
-             .then(response =>      {
-                console.log(response.data);
-             })
-            .catch(error => {
-                console.log(error);
-            });
 
-             history.push('/login')
+
+           const data = await  createUser(formData ) ;
+
+
+           if  (data ) {
+               console.log(data.data.data)
+               history.push('/login')
+
+           }
+
     }
 
 
@@ -59,7 +61,7 @@ import Terminosycondiciones from "./terminosycondiciones";
           console.log(nombre, Apellido_p, Apellido_m, Pass, Correo, Foto    )
      }
 
-      return  (
+       return   (
 
         <div className='  w-11/12    max-w-[950px]  px-10  py-20 rounded-3xl bg-white  border-2 border-gray-100    max-sm:border-0  ' >
             <h1 className='text-5xl font-semibold  max-sm:text-4xl max-sm:font-normal  text-center' >  Register  </h1>
@@ -74,7 +76,7 @@ import Terminosycondiciones from "./terminosycondiciones";
 
 
 
-                         <IonLabel position={"floating"   }  className={"max-sm:text-center  "}> Name </IonLabel>
+                         <IonLabel position={"floating"   } > Name </IonLabel>
                             <IonInput type="text"   clearInput={ true  }    maxlength={25 } value=   {formData.nombre }      onIonChange ={(event) => setFormData({...formData,  nombre: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
                       </IonItem>
                   </div>
@@ -85,7 +87,7 @@ import Terminosycondiciones from "./terminosycondiciones";
 
                          <IonItem >
 
-                         <IonLabel  position={"floating"  }   class={ "max-sm:text-center"}>    Last Name P  </IonLabel>
+                         <IonLabel  position={"floating"  }    >    Last Name P  </IonLabel>
 
 
                             <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_p  }      onIonChange ={(event) => setFormData({...formData, apellido_p : event.detail.value  != undefined ? event.detail.value : ""})} > </IonInput>
@@ -98,7 +100,8 @@ import Terminosycondiciones from "./terminosycondiciones";
 
                              <IonItem >
 
-                                 <IonLabel  position={"floating"   }   class={ "max-sm:text-center"}>  Last Name M </IonLabel>
+                                 <IonLabel  position={"floating"   }    >  Last Name M </IonLabel >
+
 
 
                                  <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_m  }       onIonChange ={(event) => setFormData({...formData, apellido_m: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
@@ -114,7 +117,7 @@ import Terminosycondiciones from "./terminosycondiciones";
 
                               <IonItem >
 
-                                 <IonLabel  position={"floating"  }   class={ "max-sm:text-center"}>    Password  </IonLabel>
+                                 <IonLabel  position={"floating"  }  >    Password  </IonLabel>
 
 
                                   <IonInput type="password"     clearInput={ true  }   maxlength={25 } value= {formData.pass }      onIonChange ={(event) => setFormData({...formData, pass: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
@@ -125,7 +128,7 @@ import Terminosycondiciones from "./terminosycondiciones";
 
                      <IonItem >
 
-                           <IonLabel position={"floating"  }      class={ "max-sm:text-center"}> Email   </IonLabel>
+                           <IonLabel position={"floating"  }    > Email   </IonLabel>
 
                           <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.correo }      onIonChange ={(event) => setFormData({...formData,  correo: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
 
@@ -139,7 +142,7 @@ import Terminosycondiciones from "./terminosycondiciones";
 
                              <IonItem >
 
-                                 <IonLabel  position={"floating"  }   class={ "max-sm:text-center"}> Foto </IonLabel>
+                                 <IonLabel  position={"floating"  }   > Foto </IonLabel>
 
 
                                  <IonInput type="text"   clearInput={  true  }   maxlength={25 } value= {formData.foto}      onIonChange ={(event) => setFormData({...formData, foto : event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
@@ -171,7 +174,7 @@ import Terminosycondiciones from "./terminosycondiciones";
                            Up
                      </button >
 
-                         <IonModal    isOpen=       {showModal}    >
+                         <IonModal    isOpen=       { showModal }    >
                              <IonHeader >
 
                                  <IonToolbar >

@@ -7,8 +7,8 @@
 
  import {
     IonContent,
-    IonHeader,
-    IonTitle,
+    IonHeader ,
+    IonTitle ,
 
     IonToolbar,
     IonList,
@@ -17,27 +17,27 @@
     IonAvatar,
     IonBadge, IonSearchbar, IonPage
  } from "@ionic/react";
- import {Simulate} from "react-dom/test-utils";
- import error = Simulate.error;
- import {findUser} from "../Api";
+  import {findUser} from "../Api";
  import {getId} from "../interfaces" ;
- import {useHistory} from "react-router-dom";
+ import {useHistory, useLocation} from "react-router-dom";
 
 
  type StateType =  {
-     name: string;
+     name: string ;
+
+
  }
 
 
- const  Contacts : React.FC <getId> = ( {user_id })  =>   {
+
+
+   const  Contacts : React.FC  <getId > = (props  )  =>   {
 
 
 
-        let [results  , setResults      ]   =      useState  (       []         )
+        let [results  , setResults      ]   =      useState  (       []           )
 
-       let navigate  = useHistory  ();
-
-
+       let history  = useHistory  ();
 
 
 
@@ -45,23 +45,35 @@
 
 
 
-       const datos = () =>    {
-              findUser() .then     (response =>  {
-                   setResults  (response.data .data    )
-             }  )
+
+
+
+
+
+
+
+     const datos  =      async ()   =>    {
+
+                 const data   =    await  findUser () ;
+
+
+
+                   setResults(data    )
+
            }
 
 
 
-         useEffect(()     => {
-             datos  ( )      ;
-            } ,    [ ]  )     ;
+
+          useEffect (()     => {
+              datos()
+            } ,    []   )     ;
 
 
 
 
 
-         const    handleChange =   (  ev: Event)   =>  {
+         const    handleChange =    (   ev: Event)   =>  {
 
 
 
@@ -78,12 +90,12 @@
 
                const  handleSubmit     =  ( name  : string  ) =>    {
 
-                   const state:  StateType = {  name:    name     } ;
+                   const state:    StateType = {  name:    name     } ;
 
-                  navigate .push(   {
-                        pathname:    '/chat/'  +    user_id     ,
+                  history.push      (   {
+                           pathname:        '/chat/'       ,
                       state :  state
-                  }) ;
+                    }  ) ;
              }
 
 
@@ -103,7 +115,7 @@
 
              <IonPage >
                    <div className={"mt-5 "}      >
-                       <IonSearchbar   class={" ion-no-padding "} color= {  "light"    }     debounce={1000}      onIonChange={(ev) => handleChange(ev)}   > </IonSearchbar>
+                       <IonSearchbar   class={" ion-no-padding "} color= {  "light"    }      debounce={1000}      onIonChange={(ev) => handleChange(ev)}   > </IonSearchbar>
 
                </div >
 
@@ -112,12 +124,13 @@
 
                       <IonList     lines={   "none" }    >
 
-                        {  results.map    ( (objects: any         )      =>
+                          {     results   .   filter  ((user  :   any) => user.user_id  !==  props.id )
 
+                               .map    ( (objects: any          )      =>
 
-                               <IonItem       onClick={ () => handleSubmit  (objects  .nombre  ) }   key =  {objects.user_id     }     >
+                                < IonItem       onClick={ () => handleSubmit  (objects   .nombre  )   }   key =  {objects.user_id     }     >
                                   <IonAvatar slot={"start"   }>
-                                 <img   src=  {avatar} alt=""   />
+                                 <img   src  =  {avatar }  alt= " "   />
                              </IonAvatar >
                              <IonLabel  >
                                  <h2   >{objects .nombre  }    </h2    >

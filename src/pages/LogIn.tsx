@@ -14,17 +14,17 @@ import  {
 } from "@ionic/react";
 
 const  LogIn: React.FC = () =>  {
-     return (<>
+     return  (
 
 
 
-             <IonPage>
-                 <IonContent>
-                <LogInForms/>
-            </IonContent>
+          <IonPage >
+              <IonContent>
 
-             </IonPage>
-        </>
+                   <LogInForms/>
+              </IonContent>
+
+         </IonPage>
      );
 };
 

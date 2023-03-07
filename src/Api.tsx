@@ -2,28 +2,32 @@ import axios from "axios";
 import {LoginData, Message, RegisterData} from "./interfaces";
 
 
-const API = axios.create({baseURL: 'http://localhost:3000'})
+const API = axios .create({baseURL: 'http://localhost:3000' }  )
 
 
-export const createUser = (formData: any) => {
-    console.log(formData)
-     return API.post('/user-create', formData);
+export   const createUser =  async  ( formData:  RegisterData ) => {
+       const  query =  await  API.post('/user-create', formData );
 
- }
-
-
-
-   export    const findUser  = ()   => {
-
-       return  API.get( '/find_user'    )
-
-
-
+        return    query
 
  }
 
 
-         export    const    findMessages =         ( ) =>  {
+
+        export     const     findUser    =      async    (       )     => {
+
+          const query   =     await   API.get(   '/find_all'         )
+            return query.data.data  ;
+
+
+
+
+
+
+ }
+
+
+         export    const     findMessages =         ( ) =>  {
 
 
 
@@ -34,14 +38,14 @@ export const createUser = (formData: any) => {
 
 
 
-          export    const login    =  (  data:  LoginData    )=>     {
-                   return API. post (   '/login'  , data    )
+          export     const login     =   (  data:  LoginData    )=>      {
+                    return API. post  (   '/login'  ,  data     )
           }
 
 
 
        export  const  finUserById    =  ( id:   string   )   =>          {
-          return   API.get   (         '/findone_user/'      +  id    )
+          return   API.get   (         '/findone_user/'      +   id     )
 
    }
 
@@ -51,5 +55,5 @@ export const createUser = (formData: any) => {
        }
 
          export   const  sendMessagess  =  (messages :   Message       )      =>     {
-           return  API.post  (   '/create_messages'     ,  messages     )
+           return  API.post  (   '/create_messages'        ,  messages     )
          }

@@ -13,19 +13,24 @@ import {
 
 
  import Profile from "../components/Profile";
-import Contacts from "../components/Contacts";
-import { RouteComponentProps } from 'react-router-dom';
+ import Contacts from "../components/Contacts";
+   import {RouteComponentProps, useLocation} from 'react-router-dom';
 
-interface Props extends RouteComponentProps<{ id: string }> {}
 
- const Menu: React.FC<Props> =  ({match})  =>  {
+type StateType =  {
 
-     const [selectedOption,  setSelectedOption] =  useState (  'contacts'   );
+    id : string ;
+}
 
-     const { id } = match.params;
 
-     console.log("el idd es", id)
 
+const Menu: React.FC   =  (  )  =>  {
+
+     const [selectedOption,  setSelectedOption] =   useState (  'contacts'   );
+
+
+     const location    =  useLocation<  StateType    >     (   )   ;
+     const  id  =   location.state?. id ;
 
 
 
@@ -40,13 +45,13 @@ interface Props extends RouteComponentProps<{ id: string }> {}
                         <IonTitle slot={ "start"} >DevChat </IonTitle>
                     </IonToolbar>
 
-               <IonSegment   value={selectedOption   }    onIonChange={e  => e.detail.value &&  setSelectedOption(e.detail.value)}>
+               <IonSegment    value={selectedOption   }    onIonChange={e  =>  e.detail.value &&  setSelectedOption(e.detail.value)}>
                  <IonSegmentButton  value="contacts"  >
                     <IonLabel >   Contacts </IonLabel>
                  </IonSegmentButton>
 
 
-                   <IonSegmentButton  value="profile"     >
+                   <IonSegmentButton  value="profile"         >
                      <IonLabel>  Profile </IonLabel>
                    </IonSegmentButton>
 
@@ -56,8 +61,8 @@ interface Props extends RouteComponentProps<{ id: string }> {}
 
              <IonContent >
 
-                   {selectedOption  === 'contacts' &&  <Contacts user_id ={id  }  />    }
-                     {selectedOption === 'profile' &&  <Profile   user_id={id}  />  }
+                   {selectedOption  === 'contacts'    &&  <Contacts  id={id} />      }
+                     {selectedOption === 'profile' &&   <Profile id={id}   />  }
 
              </IonContent>
 

@@ -13,39 +13,49 @@ import {
 
  import  avatar  from     '../assets/img/avatar.png'
  import {createOutline, logOutOutline, sendOutline} from "ionicons/icons"   ;
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {createUser, finUserById, updateUser} from "../Api";
-import {getId, RegisterData} from "../interfaces";
-
-
-       const  Profile  :  React.FC  <getId >  = ({user_id  }) =>        {
+import {getId, RegisterData} from  "../interfaces";
 
 
 
 
-           const [data,   setData   ] = useState<RegisterData  > (  {
+       const   Profile  :  React.FC  <getId >    =   (props   )  =>          {
+
+
+
+
+
+           const [data,   setData   ] = useState<RegisterData >  (   {
                user_id:  '',
                nombre: '',
                apellido_p: '',
-               apellido_m: '',
+               apellido_m :  '',
                correo: '',
-             });
+             } );
 
 
 
 
-                            let   navigate  =  useHistory    ( ) ;
 
-                            const   handleSubmit    =()   => {
-                                localStorage.removeItem(  'token'       )
-                            navigate.push('/login'  )
+
+
+
+
+            let   navigate   =  useHistory    ( ) ;
+
+                            const   handleSubmit    =()   =>  {
+
+                                navigate.push('/login'     )
+                                 localStorage.removeItem(  'token'       )
+
                           }
 
-                        const   getData  =     ()     =>    {
+                        const    getData  =     ()     =>    {
 
 
-                              finUserById    ( user_id   )  .then    (response      =>     {
-                                  setData    (  {user_id: response.data.data.user_id,   nombre  : response. data.data.nombre  , apellido_p:    response.data.data.apellido_p  ,apellido_m :  response.data.data.apellido_m  ,  correo:  response.data.data.correo     }   )
+                              finUserById    ( props.id     )  .then    (response      =>     {
+                                  setData    (  {user_id: response.data.data.user_id,    nombre  : response. data.data.nombre  , apellido_p:    response.data.data.apellido_p  ,apellido_m :  response.data.data.apellido_m  ,  correo:  response.data.data.correo     }   )
 
                            }    )
                       }
@@ -60,7 +70,7 @@ import {getId, RegisterData} from "../interfaces";
                        event.preventDefault ();
 
 
-                         updateUser  ( user_id,  data      )
+                         updateUser  (  props.id     ,   data      )
 
                            .then(response =>   {
                                console.log(response.data);
@@ -108,7 +118,7 @@ import {getId, RegisterData} from "../interfaces";
 
                                 </IonItem>
 
-                                <IonItem  lines={ "none"}  >
+                                 <IonItem  lines={ "none"}  >
 
                                   <IonLabel position={"fixed"   }  className={"max-sm:text-center   " }>Last Name M:    </IonLabel>
                               <IonInput   type="email"      maxlength={25 }  value ={data.apellido_m   }     onIonChange ={(event) => setData({ ...data,  apellido_m : event.detail.value != undefined ? event.detail.value : ""})}>  </IonInput>
@@ -117,8 +127,8 @@ import {getId, RegisterData} from "../interfaces";
 
                                  <IonItem  lines={ "none"}  >
 
-                                    <IonLabel position={"fixed"   }  className={"max-sm:text-center    " }>Email:  </IonLabel>
-                                    <IonInput   type="email"      maxlength={25 }  value ={data.correo   }     onIonChange ={(event) => setData({ ...data,  correo : event.detail.value != undefined ? event.detail.value : ""})}>  </IonInput>
+                                    <IonLabel position={"fixed"   }  className={"max-sm:text-center    " }>Email: </IonLabel>
+                                    <IonInput   type="email"      maxlength={25 }  value ={data.correo }     onIonChange ={(event) => setData({ ...data,  correo : event.detail.value != undefined ? event.detail.value : ""})}>  </IonInput>
                                     <IonIcon  icon={createOutline   }> </IonIcon>
                                 </IonItem >
 

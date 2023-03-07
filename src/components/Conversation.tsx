@@ -21,24 +21,22 @@ import {Message} from   "../interfaces"  ;
 import {RouteComponentProps, useHistory ,  useLocation} from 'react-router-dom';
 import {findMessages,  sendMessagess} from "../Api";
 
-type StateType  = {
-    name: string;
+  type StateType   = {
+     name: string;
 }
 
-  interface Props extends RouteComponentProps<{ id: string   }> {}
 
 
- const Conversation :  React.FC <Props >  =   ({match   })  =>
+ const Conversation :  React.FC  =   ()  =>
 
        {
 
-       const { id } = match .params  ;
 
 
 
 
 
-           const location = useLocation<StateType >  () ;
+           const location = useLocation<StateType >   () ;
            const name = location.state?.name;
 
 
@@ -49,7 +47,7 @@ type StateType  = {
             const   socket =  io ('http://localhost:3000'   )
 
 
-      const [messages, setMessages ] = useState < Message    []>([] );
+      const [messages, setMessages ] = useState < Message    [ ]>( [] );
         const  [message, setMessage  ]      =  useState(  ""    )
 
 
@@ -58,7 +56,7 @@ type StateType  = {
 
 
 
-             useEffect ( (   )  =>   {
+             useEffect  (  (   )   =>   {
 
 
 
@@ -66,8 +64,8 @@ type StateType  = {
 
 
 
-                 const  receiveMessage    =        (   message     :  Message   )            =>  {
-                        setMessages (    [   ...messages, message        ]
+                 const  receiveMessage    =        (   message   :    Message   )              =>  {
+                        setMessages (    [   ...messages , message        ]
 
 
                           )
@@ -80,22 +78,22 @@ type StateType  = {
 
 
 
-         socket. on   ( 'message'      ,     receiveMessage          )
+         socket. on   (  'message'       ,     receiveMessage      )
 
           return () =>  {
-             socket.off ('message'   , receiveMessage    )
-              socket.off('disconnect' )
+             socket.off  ( 'message'   , receiveMessage    )
+              socket.off( 'disconnect'  )
          }
 
       } ,  [messages, socket   ]     )
 
 
-             const   handleSubmit =   (event: any     )=>  {
-            event.preventDefault (  ) ;
+              const    handleSubmit =   (event: any     )=>  {
+             event. preventDefault (  ) ;
 
                const currentDate = new   Date( ) ;
 
-                const   currentTime =   currentDate.toLocaleTimeString   ( 'en-US',   { hour: 'numeric', minute: 'numeric', hour12: true  });
+                  const   currentTime =   currentDate.toLocaleTimeString   ( 'en-US',   { hour: 'numeric', minute: 'numeric', hour12: true  });
 
 
 
@@ -103,7 +101,7 @@ type StateType  = {
                   const  newMessage :         Message =    {
 
 
-                          from   : 1  ,
+                          from   : name   ,
 
                          contenido:  message    ,
                            fecha  :   currentTime
@@ -113,20 +111,20 @@ type StateType  = {
 
 
 
-                   sendMessagess (newMessage  ) .then   (  response =>  {
-                       console.log(response .data. data    )
+                   sendMessagess (newMessage   ) . then      (  response =>  {
+                        console.log ( response .data.   data    )
                     } )
 
 
 
 
 
-                 setMessages   (  [...messages ,        newMessage         ] )
+                 setMessages   (  [...messages ,        newMessage          ] )
 
 
 
-                      setMessage ("" )
-                   socket.emit( "message"  ,     newMessage.contenido             )
+                      setMessage (""  )
+                   socket.emit( "message"   ,      newMessage.contenido           )
 
               }
 
@@ -141,12 +139,15 @@ type StateType  = {
 
                  <IonHeader >
                      <IonToolbar   color={ "primary"  } >
-                        <IonButtons    slot="start" >
+                         <IonButtons    slot="start" >
 
 
-                                 <IonBackButton      defaultHref={"/chat-online/"+id}       />
+                                  <IonBackButton      defaultHref={"/chat-online/"  }          />
 
-                            </IonButtons >
+
+                             </IonButtons >
+
+
                              <IonAvatar slot={"start"  } >
                                <img    className= {    "p-2 "} src=   {avatar } alt="" />
                              </IonAvatar >
@@ -166,12 +167,12 @@ type StateType  = {
                               <IonGrid    >
 
 
-                                           {   messages.map  ((message      ,  index)   =>    (
+                                           {   messages.map  ((message      ,     index  )   =>    (
 
 
                                          <IonRow   key={index }   >
 
-                                         <IonCol  size= {"8 "   }        offset={message. from ===  1 ?  "4"   :  "0"   }   className=  { `p-2   border rounded-2xl    ${message.  from === 1  ?   " bg-gradient-to-r   from-cyan-500 to-blue-500  mt-4  whitespace-pre-wrap   text-white " : " bg-gradient-to-r  from-emerald-500 to-emerald-500  mt-4  whitespace-pre-wrap   text-white "} `} >
+                                         <IonCol  size= {"8 "   }        offset={message. from === name   ?    "4"   :  "0"   }   className=  { `p-2   border rounded-2xl    ${message.  from === name  ?   " bg-gradient-to-r   from-cyan-500 to-blue-500  mt-4  whitespace-pre-wrap   text-white " : " bg-gradient-to-r  from-emerald-500 to-emerald-500  mt-4  whitespace-pre-wrap   text-white "} `} >
 
                                           <b> {message. from     }    </b  >
                                               <div  className= {"  flex  justify-start  " }    >
