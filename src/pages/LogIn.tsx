@@ -17,15 +17,15 @@ const  LogIn: React.FC = () =>  {
      return  (
 
 
+         <IonPage>
+             <IonContent>
 
-          <IonPage >
-              <IonContent>
-
-                   <LogInForms/>
-              </IonContent>
-
+                 <LogInForms/>
+             </IonContent>
          </IonPage>
-     );
+
+
+            );
 };
 
 export default LogIn;

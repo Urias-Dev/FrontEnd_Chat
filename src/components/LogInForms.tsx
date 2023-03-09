@@ -86,14 +86,20 @@ const LogInForms: React.FC     = () => {
 
 
 
-          <div className={"flex  w-full h-screen"}>
-            <div className={"w-full flex items-center justify-center lg:w-1/2   "}   >
+           <div  className={"flex  w-full h-screen"}>
+            <div className={"w-full flex  items-center justify-center lg:w-1/2  "}    >
+
                 <div
                     className='w-11/12      max-w-[600px]   px-10 py-20 rounded-3xl bg-white border-2 border-gray-100 max-sm:border-0'>
-                    <h1 className='text-5xl font-semibold max-sm:text-4xl    text-center'>  DevChat   </h1>
-                     <p className='font-medium text-lg text-gray-500 mt-4 text-center '> Enter your credential </p>
                     <div className='mt-8'>
-                        <div className='flex flex-col' >
+                        <div  className={   "pb-10 "  }>
+
+                              <h1 className={ "text-4xl   text-center font-bold"}>  Welcome  </h1>
+                            <h2  className={ "text-center  text-lg  "}>Enter your credentials </h2>
+                        </div>
+
+
+                         <div className='flex flex-col' >
                             <IonItem
                                  className={`${isValid && 'ion-valid'}  ${isValid === false && 'ion-invalid'}  ${isTouched && 'ion-touched'}`} >
                                 <IonLabel position={"floating"}   > Email </IonLabel >

@@ -63,13 +63,19 @@ import Terminosycondiciones from "./terminosycondiciones";
 
        return   (
 
-        <div className='  w-11/12    max-w-[950px]  px-10  py-20 rounded-3xl bg-white  border-2 border-gray-100    max-sm:border-0  ' >
-            <h1 className='text-5xl font-semibold  max-sm:text-4xl max-sm:font-normal  text-center' >  Register  </h1>
 
-                <div className='mt-8'  >
 
-                     <form  onSubmit={handleSubmit }   >
-                 <div className=' flex flex-col ' >
+
+          <div className='  w-11/12      max-w-[950px]  px-10  py-20 rounded-3xl bg-white   border-2 border-gray-100     max-sm:border-0  ' >
+
+            <div>
+                 <h1 className='text-4xl     max-sm:text-2xl     text-center' >   Register   </h1>
+            </div>
+
+                <div className='mt-8'       >
+
+                     <form  onSubmit={handleSubmit }    >
+                 <div  className=' flex flex-col ' >
 
                      <IonItem >
 
@@ -93,7 +99,7 @@ import Terminosycondiciones from "./terminosycondiciones";
                             <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_p  }      onIonChange ={(event) => setFormData({...formData, apellido_p : event.detail.value  != undefined ? event.detail.value : ""})} > </IonInput>
 
 
-                    </IonItem>
+                      </IonItem >
                  </div>
 
                           <div className='flex flex-col mt-4'  >

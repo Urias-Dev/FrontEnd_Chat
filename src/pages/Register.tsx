@@ -25,20 +25,20 @@ import {
               <IonPage >
 
               <IonHeader  class    ="ion-no-border" >
-                 <IonToolbar >
+                 <IonToolbar   >
                         <IonButtons  slot="start" >
-                        <IonBackButton  defaultHref="login"/>
+                        <IonBackButton  defaultHref="login" />
                       </IonButtons >
                 </IonToolbar>
              </IonHeader>
 
-              <IonContent  >
+              <IonContent  scrollEvents={false } >
                    <IonRefresher slot="fixed"   onIonRefresh={ handleRefresh   }   >
                       <IonRefresherContent  refreshingSpinner=  "bubbles"    >
                       </IonRefresherContent>
                   </IonRefresher>
-                <div className={"flex   w-full h-screen"} >
-                     <div  className={"w-full flex items-center justify-center  max-sm:h-4/5 "  }>
+                <div className={" w-full h-screen"}  >
+                     <div  className={"w-full flex items-center justify-center   max-sm:h-4/5 "   }>
                          <RegisterForms />
                     </div>
 

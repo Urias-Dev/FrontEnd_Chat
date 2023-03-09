@@ -42,12 +42,13 @@ import {getId, RegisterData} from  "../interfaces";
 
 
 
-            let   navigate   =  useHistory    ( ) ;
+            let   navigate   =   useHistory     ( )  ;
 
                             const   handleSubmit    =()   =>  {
 
-                                navigate.push('/login'     )
-                                 localStorage.removeItem(  'token'       )
+                                localStorage.removeItem(  'token'       )
+
+                                navigate.push('/'       )
 
                           }
 
@@ -84,7 +85,7 @@ import {getId, RegisterData} from  "../interfaces";
 
                    return  (< >
 
-                         <IonPage>
+                          <IonPage>
 
 
                            <IonContent >
@@ -148,7 +149,7 @@ import {getId, RegisterData} from  "../interfaces";
                     <div className= { "flex ion-justify-content-end  mb-10 mr-3  "}  >
                          <button   onClick={() => handleSubmit () } >
                             <IonFabButton size={"small"} color={ "primary" }  >
-                                <IonIcon  icon= {logOutOutline   }  ></IonIcon>
+                                <IonIcon  icon= {logOutOutline    }  ></IonIcon>
                             </IonFabButton>
                         </button>
                     </div>
