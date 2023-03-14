@@ -15,202 +15,202 @@ import {useHistory} from "react-router-dom";
 import {RegisterData} from "../interfaces";
 import Terminosycondiciones from "./terminosycondiciones";
 
- const RegisterForms: React.FC =  () => {
+const RegisterForms: React.FC = () => {
 
-     const [showModal , setShowModal] =  useState     (false);
-     const [terminos, setTerminos] = useState (false);
-
-
+    const [showModal, setShowModal] = useState(false);
+    const [terminos, setTerminos] = useState(false);
 
 
+    const history = useHistory();
 
-
-     const history = useHistory ();
-
-      const [formData,   setFormData] = useState<RegisterData  >  (   {
+    const [formData, setFormData] = useState<RegisterData>({
 
         nombre: '',
         apellido_p: '',
         apellido_m: '',
         pass: '',
         correo: '',
-         foto:  ''
-    }) ;
+        foto: ''
+    });
 
-     const   handleSubmit = async  (event : any )  => {
-         event.preventDefault();
-
-
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
 
 
+        const data = await createUser(formData);
 
-           const data = await  createUser(formData ) ;
 
+        if (data) {
+            console.log(data.data.data)
+            history.push('/login')
 
-           if  (data ) {
-               console.log(data.data.data)
-               history.push('/login')
-
-           }
+        }
 
     }
 
 
+    const datos = (nombre: string, Apellido_p: string, Apellido_m: string, Pass: string, Correo: string, Foto: string) => {
+        console.log(nombre, Apellido_p, Apellido_m, Pass, Correo, Foto)
+    }
 
-     const     datos = (nombre: string , Apellido_p: string, Apellido_m:  string, Pass: string , Correo:   string, Foto  : string  ) => {
-          console.log(nombre, Apellido_p, Apellido_m, Pass, Correo, Foto    )
-     }
-
-       return   (
-
+    return (
 
 
-
-          <div className='  w-11/12      max-w-[950px]  px-10  py-20 rounded-3xl bg-white   border-2 border-gray-100     max-sm:border-0  ' >
+        <div
+            className='  w-11/12      max-w-[950px]  px-10  py-20 rounded-3xl bg-white   border-2 border-gray-100     max-sm:border-0  '>
 
             <div>
-                 <h1 className='text-4xl     max-sm:text-2xl     text-center' >   Register   </h1>
+                <h1 className='text-4xl     max-sm:text-2xl     text-center'> Register </h1>
             </div>
 
-                <div className='mt-8'       >
+            <div className='mt-8'>
 
-                     <form  onSubmit={ handleSubmit }    >
-                 <div  className=' flex flex-col ' >
+                <form onSubmit={handleSubmit}>
+                    <div className=' flex flex-col '>
 
-                     <IonItem >
+                        <IonItem>
 
 
+                            <IonLabel position={"floating"}> Name </IonLabel>
+                            <IonInput type="text" clearInput={true} maxlength={25} value={formData.nombre}
+                                      onIonChange={(event) => setFormData({
+                                          ...formData,
+                                          nombre: event.detail.value != undefined ? event.detail.value : ""
+                                      })}> </IonInput>
+                        </IonItem>
+                    </div>
 
 
-                         <IonLabel position={"floating"   } > Name </IonLabel>
-                            <IonInput type="text"   clearInput={ true  }    maxlength={25 } value=   {formData.nombre }      onIonChange ={(event) => setFormData({...formData,  nombre: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
-                      </IonItem>
-                  </div>
+                    <div className='flex flex-col mt-4'>
 
+                        <IonItem>
 
+                            <IonLabel position={"floating"}> Last Name P </IonLabel>
 
-                 <div className='flex flex-col mt-4'    >
 
-                         <IonItem >
+                            <IonInput type="text" clearInput={true} maxlength={25} value={formData.apellido_p}
+                                      onIonChange={(event) => setFormData({
+                                          ...formData,
+                                          apellido_p: event.detail.value != undefined ? event.detail.value : ""
+                                      })}> </IonInput>
 
-                         <IonLabel  position={"floating"  }    >    Last Name P  </IonLabel>
 
+                        </IonItem>
+                    </div>
 
-                            <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_p  }      onIonChange ={(event) => setFormData({...formData, apellido_p : event.detail.value  != undefined ? event.detail.value : ""})} > </IonInput>
+                    <div className='flex flex-col mt-4'>
 
+                        <IonItem>
 
-                      </IonItem >
-                 </div>
+                            <IonLabel position={"floating"}> Last Name M </IonLabel>
 
-                          <div className='flex flex-col mt-4'  >
 
-                             <IonItem >
+                            <IonInput type="text" clearInput={true} maxlength={25} value={formData.apellido_m}
+                                      onIonChange={(event) => setFormData({
+                                          ...formData,
+                                          apellido_m: event.detail.value != undefined ? event.detail.value : ""
+                                      })}> </IonInput>
 
-                                 <IonLabel  position={"floating"   }    >  Last Name M </IonLabel >
 
+                        </IonItem>
+                    </div>
 
+                    <div className='flex flex-col mt-4'>
 
-                                 <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.apellido_m  }       onIonChange ={(event) => setFormData({...formData, apellido_m: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
+                        <IonItem>
 
+                            <IonLabel position={"floating"}> Password </IonLabel>
 
 
+                            <IonInput type="password" clearInput={true} maxlength={25} value={formData.pass}
+                                      onIonChange={(event) => setFormData({
+                                          ...formData,
+                                          pass: event.detail.value != undefined ? event.detail.value : ""
+                                      })}> </IonInput>
+                        </IonItem>
+                    </div>
 
+                    <div className='flex flex-col mt-4'>
 
-                             </IonItem>
-                         </div>
+                        <IonItem>
 
-                         <div className='flex flex-col mt-4'  >
+                            <IonLabel position={"floating"}> Email </IonLabel>
 
-                              <IonItem >
+                            <IonInput type="text" clearInput={true} maxlength={25} value={formData.correo}
+                                      onIonChange={(event) => setFormData({
+                                          ...formData,
+                                          correo: event.detail.value != undefined ? event.detail.value : ""
+                                      })}> </IonInput>
 
-                                 <IonLabel  position={"floating"  }  >    Password  </IonLabel>
 
+                        </IonItem>
+                    </div>
 
-                                  <IonInput type="password"     clearInput={ true  }   maxlength={25 } value= {formData.pass }      onIonChange ={(event) => setFormData({...formData, pass: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
-                             </IonItem>
-                         </div>
+                    <div className='flex flex-col mt-4'>
 
-                 <div className='flex flex-col mt-4'    >
+                        <IonItem>
 
-                     <IonItem >
+                            <IonLabel position={"floating"}> Foto </IonLabel>
 
-                           <IonLabel position={"floating"  }    > Email   </IonLabel>
 
-                          <IonInput type="text"   clearInput={ true  }   maxlength={25 } value= {formData.correo }      onIonChange ={(event) => setFormData({...formData,  correo: event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
+                            <IonInput type="text" clearInput={true} maxlength={25} value={formData.foto}
+                                      onIonChange={(event) => setFormData({
+                                          ...formData,
+                                          foto: event.detail.value != undefined ? event.detail.value : ""
+                                      })}> </IonInput>
 
+                        </IonItem>
+                    </div>
 
 
+                    <div className={"flex   flex-col  mt-4 "}>
+                        <IonItem>
 
-                     </IonItem>
-                </div>
 
-                         <div className='flex flex-col mt-4'  >
+                            <IonCheckbox onIonChange={e => setTerminos(e.detail.checked)}
+                                         onClick={() => setShowModal(true)}> </IonCheckbox>
+                            <IonLabel className={"ml-3  "}>Ver términos y condiciones </IonLabel>
 
-                             <IonItem >
 
-                                 <IonLabel  position={"floating"  }   > Foto </IonLabel>
+                        </IonItem>
+                    </div>
 
 
-                                 <IonInput type="text"   clearInput={  true  }   maxlength={25 } value= {formData.foto}      onIonChange ={(event) => setFormData({...formData, foto : event.detail.value != undefined ? event.detail.value : ""})} > </IonInput>
+                    <div className='mt-8  flex flex-col gap-y-4'>
+                        <button type={"submit"} disabled={!terminos}
+                                className='active:scale-[.98] active:duration-75    transition-all hover:scale-[1.01]  ease-in-out transform py-4   bg-gradient-to-r from-cyan-500 to-blue-500  rounded-xl text-white font-bold text-lg'>Sign
+                            Up
+                        </button>
 
-                              </IonItem>
-                         </div>
+                        <IonModal isOpen={showModal}>
+                            <IonHeader>
 
+                                <IonToolbar>
 
-                           <div className={ "flex   flex-col  mt-4 " }   >
-                                  <IonItem>
+                                    <IonTitle slot={"start"}> Terminos y condiciones </IonTitle>
+                                    <IonButtons slot={"end"}>
+                                        <IonButton onClick={() => setShowModal(false)}>Cerrar</IonButton>
+                                    </IonButtons>
 
+                                </IonToolbar>
+                            </IonHeader>
+                            <IonContent className={" ion-padding  "}>
+                                <Terminosycondiciones/>
 
 
-                                         <IonCheckbox onIonChange=   {e  =>  setTerminos(e.detail.checked)}     onClick= {  () =>     setShowModal        (     true)} >  </IonCheckbox>
-                                       <IonLabel    className={"ml-3  "   }>Ver términos  y  condiciones </IonLabel>
+                            </IonContent>
 
 
-                                 </IonItem  >
-                              </div     >
+                        </IonModal>
 
 
+                    </div>
 
-
-
-
-                     <div className=  'mt-8  flex flex-col gap-y-4'  >
-                     <button type={"submit"   }   disabled={!terminos}
-                          className='active:scale-[.98] active:duration-75    transition-all hover:scale-[1.01]  ease-in-out transform py-4   bg-gradient-to-r from-cyan-500 to-blue-500  rounded-xl text-white font-bold text-lg'>Sign
-                           Up
-                     </button >
-
-                         <IonModal    isOpen=       { showModal }    >
-                             <IonHeader >
-
-                                 <IonToolbar >
-
-                                       <IonTitle slot={"start" }>  Terminos y condiciones   </IonTitle>
-                                      <IonButtons  slot= {"end"}>
-                                           <IonButton   onClick={  () =>    setShowModal  ( false)}>Cerrar</IonButton>
-                                     </IonButtons>
-
-                                 </IonToolbar>
-                              </IonHeader>
-                             <IonContent className={" ion-padding  "}>
-                                 <Terminosycondiciones  />
-
-
-                             </IonContent>
-
-
-
-
-                         </IonModal>
-
-
-                     </div>
-
-                     </form>
+                </form>
 
             </div>
         </div>
-    ) ;
+    );
 };
 
 export default RegisterForms;
