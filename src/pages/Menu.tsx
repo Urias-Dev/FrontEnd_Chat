@@ -19,18 +19,20 @@ import {
 
 type StateType =  {
 
-    id : string ;
+    id : number   ;
+     status : boolean   ;
 }
 
 
 
-const Menu: React.FC   =  (  )  =>  {
+const  Menu: React.FC   =  (   )  =>  {
 
      const [selectedOption,  setSelectedOption] =   useState (  'contacts'   );
 
 
-     const location    =  useLocation<  StateType    >     (   )   ;
-     const  id  =   location.state?. id ;
+     const location    =  useLocation <  StateType     >     (   )   ;
+     const  id  =   location.state?. id  ;
+      const status    = location.state?.status ;
 
 
 
@@ -39,15 +41,15 @@ const Menu: React.FC   =  (  )  =>  {
      return    ( <  >
 
              <IonPage>
-                  <IonHeader >
+                   <IonHeader >
 
                      <IonToolbar color={ "primary" }>
-                        <IonTitle slot={ "start"} >DevChat </IonTitle>
+                        <IonTitle slot={ "start"} >  DevChat    </IonTitle>
                     </IonToolbar>
 
-               <IonSegment    value={selectedOption   }    onIonChange={e  =>  e.detail.value &&  setSelectedOption(e.detail.value)}>
-                 <IonSegmentButton  value="contacts"  >
-                    <IonLabel >   Contacts </IonLabel>
+               <IonSegment    value={selectedOption   }    onIonChange={e  =>  e.detail.value &&   setSelectedOption(e.detail.value)}>
+                 <IonSegmentButton   value="contacts"   >
+                    <IonLabel >   Contacts </IonLabel >
                  </IonSegmentButton>
 
 
@@ -61,8 +63,8 @@ const Menu: React.FC   =  (  )  =>  {
 
              <IonContent >
 
-                   {selectedOption  === 'contacts'    &&  <Contacts  id={id} />      }
-                     {selectedOption === 'profile' &&   <Profile id={id}   />  }
+                   {selectedOption  === 'contacts'     &&   <Contacts  id={id}    status =  {status} />      }
+                     {selectedOption === 'profile' &&   <Profile id={id}  status= {status }  />  }
 
              </IonContent>
 

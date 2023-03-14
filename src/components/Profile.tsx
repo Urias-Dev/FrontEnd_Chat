@@ -14,22 +14,22 @@ import {
  import  avatar  from     '../assets/img/avatar.png'
  import {createOutline, logOutOutline, sendOutline} from "ionicons/icons"   ;
 import {useHistory, useLocation} from "react-router-dom";
-import {createUser, finUserById, updateUser} from "../Api";
-import {getId, RegisterData} from  "../interfaces";
+import {createUser,  finUserById, updateUser } from "../Api";
+import {getId,  RegisterData} from  "../interfaces" ;
 
 
 
 
-       const   Profile  :  React.FC  <getId >    =   (props   )  =>          {
+       const   Profile  :  React.FC  <getId >    =   (props    )  =>          {
 
 
 
 
 
-           const [data,   setData   ] = useState<RegisterData >  (   {
-               user_id:  '',
-               nombre: '',
-               apellido_p: '',
+           const [data,   setData    ] = useState<RegisterData >  (   {
+
+                  nombre: '',
+                 apellido_p: '',
                apellido_m :  '',
                correo: '',
              } );
@@ -42,21 +42,21 @@ import {getId, RegisterData} from  "../interfaces";
 
 
 
-            let   navigate   =   useHistory     ( )  ;
+            let   navigate    =     useHistory     ( )  ;
 
                             const   handleSubmit    =()   =>  {
 
                                 localStorage.removeItem(  'token'       )
 
-                                navigate.push('/'       )
+                                navigate.push('/'        )
 
                           }
 
                         const    getData  =     ()     =>    {
 
 
-                              finUserById    ( props.id     )  .then    (response      =>     {
-                                  setData    (  {user_id: response.data.data.user_id,    nombre  : response. data.data.nombre  , apellido_p:    response.data.data.apellido_p  ,apellido_m :  response.data.data.apellido_m  ,  correo:  response.data.data.correo     }   )
+                              finUserById    (  props.id     )  .then    (response      =>     {
+                                  setData    (   {user_id: response.data.data.user_id,    nombre  : response. data.data.nombre  , apellido_p:    response.data.data.apellido_p  ,apellido_m :  response.data.data.apellido_m  ,  correo:  response.data.data.correo     }   )
 
                            }    )
                       }
@@ -67,11 +67,11 @@ import {getId, RegisterData} from  "../interfaces";
                              }   ,    []  )
 
 
-                    const   update  =    (event : any )   => {
+                    const   update  =    (event : any )    => {
                        event.preventDefault ();
 
 
-                         updateUser  (  props.id     ,   data      )
+                         updateUser  (  props.id       ,    data      )
 
                            .then(response =>   {
                                console.log(response.data);

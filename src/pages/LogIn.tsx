@@ -7,7 +7,7 @@ import  {
     IonGrid,
     IonHeader,
     IonRow,
-    IonTitle,
+     IonTitle,
     IonToolbar,
     IonPage,
     IonItem, IonLabel, IonInput, IonNote, IonAlert

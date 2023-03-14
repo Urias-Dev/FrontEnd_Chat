@@ -2,7 +2,7 @@ import axios from "axios";
 import {LoginData , Message, RegisterData} from "./interfaces";
 
 
-const API = axios .create({baseURL: 'http://192.168.1.108:3000' }     )
+const API = axios .create({baseURL:  'http://192.168.1.108:3000' }     )
 
 
 export   const createUser =  async  ( formData:  RegisterData ) => {
@@ -16,7 +16,7 @@ export   const createUser =  async  ( formData:  RegisterData ) => {
 
         export     const     findUser    =      async    (       )     => {
 
-          const query   =     await   API.get(   '/find_all'         )
+          const query   =     await   API.get(   '/find_all'           )
             return query.data.data  ;
 
 
@@ -27,7 +27,7 @@ export   const createUser =  async  ( formData:  RegisterData ) => {
  }
 
 
-         export    const     findMessages =         ( ) =>  {
+         export    const      findMessages  =         ( ) =>  {
 
 
 
@@ -39,21 +39,55 @@ export   const createUser =  async  ( formData:  RegisterData ) => {
 
 
           export     const login     =   (  data:  LoginData    )=>      {
-                    return API. post  (   '/login'  ,  data     )
+                    return API. post  (    '/login'  ,  data     )
           }
 
 
 
-       export  const  finUserById    =  ( id:   string   )   =>          {
-          return   API.get   (         '/findone_user/'      +   id     )
+           export   const  finUserById    =  ( id:   number    )   =>          {
+          return   API. get   (           '/findone_user/'         +   id     )
 
    }
 
 
-    export    const   updateUser  = ( user_id: string , data: RegisterData   ) => {
+    export    const   updateUser  = ( user_id:  number  , data: RegisterData    ) => {
              return   API.put  ('/update_user/'+   user_id , data      )
-       }
 
-         export   const  sendMessagess  =  (messages :   Message       )      =>     {
-           return  API.post  (   '/create_messages'        ,  messages     )
-         }
+            }
+
+
+             export    const  sendMessage  =   async  (    messages   : Message     )        =>      {
+                return   await    API.  post   (      '/create_messages'         ,  messages        )
+
+
+           }
+
+
+
+
+           export   const   getChatId   = async  (  id1   :  number ,  id2  :  number  )  =>    {
+
+                const  query   =   await    API.get  (        '/findChat/'  +   id1 + '/'    +  id2      )
+
+
+               const id =  query.data .id_conversacion ;
+
+               console.log(id   )
+                return id
+
+
+           }
+
+
+          export   const  findChat        =   async   (   id1:    number  , id2 :   number     )       =>      {
+
+         const  query   =   await   API.get (        '/findChat/'  +   id1 + '/'    +  id2      )
+
+
+
+
+
+          return query.data
+
+   }
+

@@ -11,14 +11,14 @@ import {
 
  import RegisterForms from "../components/RegisterForms";
 
-  const Register: React.FC = () => {
+  const  Register: React.FC = () => {
 
 
        function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
          setTimeout(() => {
              // Any calls to load data go here
              event.detail.complete ();
-         }, 2000);
+         }, 2000) ;
        }
       return (<>
 
@@ -32,8 +32,10 @@ import {
                 </IonToolbar>
              </IonHeader>
 
-              <IonContent  scrollEvents={false } >
-                   <IonRefresher slot="fixed"   onIonRefresh={ handleRefresh   }   >
+
+
+                 <IonContent  scrollEvents={false } >
+                    <IonRefresher slot="fixed"   onIonRefresh={ handleRefresh   }   >
                       <IonRefresherContent  refreshingSpinner=  "bubbles"    >
                       </IonRefresherContent>
                   </IonRefresher>

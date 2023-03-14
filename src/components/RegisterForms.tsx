@@ -28,7 +28,7 @@ import Terminosycondiciones from "./terminosycondiciones";
      const history = useHistory ();
 
       const [formData,   setFormData] = useState<RegisterData  >  (   {
-          user_id: '',
+
         nombre: '',
         apellido_p: '',
         apellido_m: '',
@@ -74,7 +74,7 @@ import Terminosycondiciones from "./terminosycondiciones";
 
                 <div className='mt-8'       >
 
-                     <form  onSubmit={handleSubmit }    >
+                     <form  onSubmit={ handleSubmit }    >
                  <div  className=' flex flex-col ' >
 
                      <IonItem >
