@@ -20,7 +20,7 @@ import {
 type StateType =  {
 
     id : number   ;
-     status : boolean   ;
+  
 }
 
 
@@ -32,8 +32,7 @@ const  Menu: React.FC   =  (   )  =>  {
 
      const location    =  useLocation <  StateType     >     (   )   ;
      const  id  =   location.state?. id  ;
-      const status    = location.state?.status ;
-
+  
 
 
 
@@ -49,7 +48,8 @@ const  Menu: React.FC   =  (   )  =>  {
 
                <IonSegment    value={selectedOption   }    onIonChange={e  =>  e.detail.value &&   setSelectedOption(e.detail.value)}>
                  <IonSegmentButton   value="contacts"   >
-                    <IonLabel >   Contacts </IonLabel >
+                    <IonLabel >   Contacts </IonLabel > 
+
                  </IonSegmentButton>
 
 
@@ -63,8 +63,8 @@ const  Menu: React.FC   =  (   )  =>  {
 
              <IonContent >
 
-                   {selectedOption  === 'contacts'     &&   <Contacts  id={id}    status =  {status} />      }
-                     {selectedOption === 'profile' &&   <Profile id={id}  status= {status }  />  }
+                   {selectedOption  === 'contacts'     &&   <Contacts  id={id}     />      }
+                     {selectedOption === 'profile' &&   <Profile id={id}   />  }
 
              </IonContent>
 

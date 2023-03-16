@@ -28,7 +28,7 @@
 
      export interface  getId      {
        id:   number ,
-         status  : boolean
+        
    }
 
 
