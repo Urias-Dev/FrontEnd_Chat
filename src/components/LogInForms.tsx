@@ -11,7 +11,6 @@ import {stat} from "fs";
 
 type  StateType = {
     id: number;
-    status: boolean;
 
 }
 
@@ -58,9 +57,9 @@ const LogInForms: React.FC = () => {
         const data = await login(formData);
         if (data) {
 
-            const activo: boolean = data.data.data.status
-            console.log(activo)
-            const state: StateType = {id: data.data.data.user_id, status: activo};
+        
+        
+            const state: StateType = {id: data.data.data.user_id };
             history.push({
                 pathname: '/chat-online/',
                 state: state

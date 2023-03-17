@@ -108,7 +108,7 @@ const Contacts: React.FC<getId> = (props) => {
 
                                     </IonLabel>
                                     <IonBadge slot={"end"} className={"rounded-full p-2  "} color={"primary"}>
-                                        <span> {props.status ? "Online" : "Offline"}  </span>
+                                    
                                     </IonBadge>
                                 </IonItem>
                             )}
