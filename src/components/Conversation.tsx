@@ -29,8 +29,10 @@ type StateType = {
 
 }
 
+const groupMessage: { [key: string]: Message[] } = {};
 
-const Conversation: React.FC = () => {
+
+function Conversation(): JSX.Element {
 
 
     const location = useLocation<StateType>();
@@ -44,9 +46,8 @@ const Conversation: React.FC = () => {
 
 
     const [messages, setMessages] = useState<Message[]>([]);
-    const [message, setMessage] = useState(" ")
+    const [message, setMessage] = useState<any>()
     const [items, setItems] = useState(0);
-
 
     const datos = async () => {
 
@@ -57,6 +58,18 @@ const Conversation: React.FC = () => {
         findChat(id1, id2).then(responze => {
 
             setMessages(responze.data)
+
+            console.log(messages)
+
+            messages?.forEach((message: Message) => {
+                if (!groupMessage[message.fecha]) {
+                    groupMessage[message.fecha] = [];
+                }
+
+                groupMessage[message.fecha].push(message);
+            })
+
+            console.log(groupMessage)
 
 
         })
@@ -76,7 +89,7 @@ const Conversation: React.FC = () => {
 
             findChat(id1, id2).then(responze => {
                 console.log(message, responze.data)
-                setMessages([message, ...responze.data])
+                setMessages([...responze.data])
 
 
             })
@@ -170,8 +183,47 @@ const Conversation: React.FC = () => {
 
                 <IonGrid>
 
+                    <>
+                        {
+                            Object.entries(groupMessage).map(([date, messages]) => (
+                                <>
+                                    <div style={{
+                                        display: "grid",
+                                        placeItems: "center"
+                                    }}>
+                                        <span>{date}</span>
+                                    </div>
+                                    {
+                                        messages.map((object, index) => {
+                                            return (
+                                                <IonRow key={index}>
 
-                    {messages.map((object, index) => (
+                                                    <IonCol size={"8 "} offset={object.id_usuario_env === id1 ? "4" : "0 "}
+                                                        className={`p-2    border rounded-2xl       ${object.id_usuario_env === id1 ? " bg-gradient-to-r   from-cyan-500 to-blue-500  mt-4  whitespace-pre-wrap   text-white " : " bg-gradient-to-r  from-emerald-500 to-emerald-500  mt-4  whitespace-pre-wrap   text-white "} `}>
+
+
+                                                        <div className={"  flex   justify-start   "}>
+                                                            <span>{object.contenido}  </span>
+                                                        </div>
+                                                        <div className={"flex justify-end "}><br />
+                                                            <span>   {object.fecha}  </span>
+                                                        </div>
+
+
+                                                    </IonCol>
+
+
+                                                </IonRow>
+                                            )
+                                        })
+                                    }
+                                </>
+
+                            ))
+                        }
+                    </>
+
+                    {/* {messages.map((object, index) => (
 
 
                         <IonRow key={index}>
@@ -192,7 +244,7 @@ const Conversation: React.FC = () => {
 
 
                         </IonRow>
-                    ))}
+                    ))} */}
 
 
                 </IonGrid>
