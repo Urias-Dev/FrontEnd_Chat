@@ -2,7 +2,7 @@ import axios from "axios";
 import {LoginData, Message, RegisterData} from "./interfaces";
 
 
-const API = axios.create({baseURL: 'http://localhost:3000'})
+const API = axios.create({baseURL: 'http://192.168.1.108:3000'})
 
 
 export const createUser = async (formData: RegisterData) => {
